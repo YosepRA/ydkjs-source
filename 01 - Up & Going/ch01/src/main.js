@@ -1,7 +1,10 @@
-console.log('Hello YDKJS Webpack configgg');
+function main() {
+  const a = 21;
+  const b = a * 2;
 
-function start() {
-  document.body.style.backgroundColor = 'beige';
+  console.log(b);
+
+  /* ===================================================================== */
 }
 
-window.addEventListener('load', start);
+export default main;

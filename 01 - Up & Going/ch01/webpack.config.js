@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    main: path.join(__dirname, 'src/main.js'),
+    index: path.join(__dirname, 'src/index.js'),
   },
   output: {
     filename: '[name].bundle.js',
@@ -18,6 +18,11 @@ module.exports = {
     port: 8000,
   },
   devtool: 'eval-source-map',
+  resolve: {
+    alias: {
+      Utilities: path.resolve(__dirname, '../../utils'),
+    },
+  },
   // optimization: {
   //   runtimeChunk: 'single',
   // },
