@@ -1,10 +1,7 @@
+import ch01 from './chapters/ch01.js';
+
 function main() {
-  const a = 21;
-  const b = a * 2;
-
-  console.log(b);
-
-  /* ===================================================================== */
+  ch01();
 }
 
 export default main;
