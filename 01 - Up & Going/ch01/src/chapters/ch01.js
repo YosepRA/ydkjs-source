@@ -33,27 +33,109 @@ function ch01() {
 
   /* ===================================================================== */
 
-  // Conditionals
+  // // Conditionals
 
-  const bankBalance = 300;
-  const phonePrice = 99.99;
+  // const bankBalance = 300;
+  // const phonePrice = 99.99;
 
-  if (phonePrice < bankBalance) {
-    console.log(
-      `The price of this phone is $${20}, and my bank balance is $${bankBalance}. This phone is affordable!`,
-    );
+  // if (phonePrice < bankBalance) {
+  //   console.log(
+  //     `The price of this phone is $${20}, and my bank balance is $${bankBalance}. This phone is affordable!`,
+  //   );
+  // }
+
+  // const accessoryPrice = 15;
+  // const phoneAndAccessoryPrice = phonePrice + accessoryPrice;
+
+  // if (phoneAndAccessoryPrice < bankBalance) {
+  //   console.log(
+  //     `The total of phone and accessories price is $${phoneAndAccessoryPrice}, and my bank balance is $${bankBalance}. I can afford both the phone and the accesories.`,
+  //   );
+  // } else {
+  //   console.log("I can't afford phone plus accessories.");
+  // }
+
+  /* ===================================================================== */
+
+  // // Loops
+
+  // const maxCustomers = 5;
+  // let numOfCustomers = maxCustomers;
+
+  // while (numOfCustomers > 0) {
+  //   // Count from one.
+  //   const customerNumber = Math.abs(numOfCustomers - maxCustomers - 1);
+
+  //   console.log(`The clerk is serving customer number ${customerNumber}`);
+
+  //   numOfCustomers = numOfCustomers - 1;
+  // }
+
+  /* ===================================================================== */
+
+  // // Functions
+
+  // const TAX_RATE = 0.08;
+
+  // function calculateFinalPurchaseAmount(amount) {
+  //   const total = amount + amount * TAX_RATE;
+
+  //   return total;
+  // }
+
+  // const phonePrice = 49.99;
+  // const totalPhonePrice = calculateFinalPurchaseAmount(phonePrice);
+
+  // console.log(`Total phone price is $${totalPhonePrice.toFixed(2)}`);
+
+  /* ===================================================================== */
+
+  // Practice
+  /* 
+    - Create an app to keep on buying phones until bank balance is no longer 
+    sufficient.
+    - Add tax to the total purchase.
+    - Use prompt for bank balance input for additional challenge.
+  */
+
+  const taxRate = 0.08;
+  const bankBalance = parseFloat(prompt('Enter your bank balance'));
+  const phonePrice = 9.99;
+  const phoneAccesoryPrice = 1.99;
+  const phoneAndAccessoryPrice = phonePrice + phoneAccesoryPrice;
+
+  if (Number.isNaN(bankBalance)) {
+    const message = 'Bank balance should only contain numbers';
+
+    alert(message);
+    throw new Error(message);
   }
 
-  const accessoryPrice = 15;
-  const phoneAndAccessoryPrice = phonePrice + accessoryPrice;
+  function calculateTotalPrice(amount) {
+    const totalAmount = amount + amount * taxRate;
 
-  if (phoneAndAccessoryPrice < bankBalance) {
-    console.log(
-      `The total of phone and accessories price is $${phoneAndAccessoryPrice}, and my bank balance is $${bankBalance}. I can afford both the phone and the accesories.`,
-    );
-  } else {
-    console.log("I can't afford phone plus accessories.");
+    return totalAmount;
   }
+
+  function purchase() {
+    let totalPrice = 0;
+    let phoneAndAccessoryQuantity = 0;
+
+    const unitPrice = calculateTotalPrice(phoneAndAccessoryPrice);
+
+    while (totalPrice + unitPrice < bankBalance) {
+      totalPrice = totalPrice + unitPrice;
+      phoneAndAccessoryQuantity = phoneAndAccessoryQuantity + 1;
+    }
+
+    return { totalPrice, unitPrice, phoneAndAccessoryQuantity };
+  }
+
+  const purchasedPhone = purchase();
+
+  console.log(
+    `With my bank balance of $${bankBalance}, I can buy ${purchasedPhone.phoneAndAccessoryQuantity} set${purchasedPhone.phoneAndAccessoryQuantity > 1 ? 's' : ''} of phone and accessory with a unit price of $${purchasedPhone.unitPrice.toFixed(2)} and a total price of $${purchasedPhone.totalPrice.toFixed(2)}.`,
+  );
 }
 
 export default ch01;
