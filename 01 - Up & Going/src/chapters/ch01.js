@@ -99,17 +99,11 @@ function ch01() {
   */
 
   const taxRate = 0.08;
-  const bankBalance = parseFloat(prompt('Enter your bank balance'));
   const phonePrice = 9.99;
   const phoneAccesoryPrice = 1.99;
   const phoneAndAccessoryPrice = phonePrice + phoneAccesoryPrice;
 
-  if (Number.isNaN(bankBalance)) {
-    const message = 'Bank balance should only contain numbers';
-
-    alert(message);
-    throw new Error(message);
-  }
+  let bankBalance = 0;
 
   function calculateTotalPrice(amount) {
     const totalAmount = amount + amount * taxRate;
@@ -121,6 +115,7 @@ function ch01() {
     let totalPrice = 0;
     let phoneAndAccessoryQuantity = 0;
 
+    // Phone, accessory, plus tax.
     const unitPrice = calculateTotalPrice(phoneAndAccessoryPrice);
 
     while (totalPrice + unitPrice < bankBalance) {
@@ -131,11 +126,32 @@ function ch01() {
     return { totalPrice, unitPrice, phoneAndAccessoryQuantity };
   }
 
-  const purchasedPhone = purchase();
+  function exercise() {
+    bankBalance = parseFloat(prompt('Enter your bank balance'));
 
-  console.log(
-    `With my bank balance of $${bankBalance}, I can buy ${purchasedPhone.phoneAndAccessoryQuantity} set${purchasedPhone.phoneAndAccessoryQuantity > 1 ? 's' : ''} of phone and accessory with a unit price of $${purchasedPhone.unitPrice.toFixed(2)} and a total price of $${purchasedPhone.totalPrice.toFixed(2)}.`,
-  );
+    if (Number.isNaN(bankBalance)) {
+      const message = 'Bank balance should only contain numbers';
+
+      alert(message);
+      throw new Error(message);
+    }
+
+    const purchasedPhone = purchase();
+
+    if (purchasedPhone.phoneAndAccessoryQuantity < 1) {
+      console.log(
+        "You can't afford to buy the phone plus accessory with your bank balance.",
+      );
+
+      return undefined;
+    }
+
+    console.log(
+      `With my bank balance of $${bankBalance}, I can buy ${purchasedPhone.phoneAndAccessoryQuantity} set${purchasedPhone.phoneAndAccessoryQuantity > 1 ? 's' : ''} of phone and accessory with a unit price of $${purchasedPhone.unitPrice.toFixed(2)} and a total price of $${purchasedPhone.totalPrice.toFixed(2)}.`,
+    );
+  }
+
+  exercise();
 }
 
 export default ch01;

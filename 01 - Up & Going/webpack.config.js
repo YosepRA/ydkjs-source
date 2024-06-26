@@ -43,7 +43,7 @@ module.exports = {
   devtool: 'eval-source-map',
   resolve: {
     alias: {
-      Utilities: path.resolve(__dirname, '../../utils'),
+      Utilities: path.resolve(__dirname, '../utils'),
     },
   },
   // optimization: {
