@@ -1,4 +1,9 @@
 function ch01() {
+  console.log("You Don't Know JS V01-Ch01");
+  console.log(
+    '/* ==================================================================== */',
+  );
+
   // const a = 21;
   // const b = a * 2;
 
